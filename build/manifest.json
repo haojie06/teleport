@@ -2,8 +2,8 @@
   "format_version": 1,
   "header": {
     "description": "teleport",
-    "name": "Teleport Addon",
-    "uuid": "ff0d3a21-4ea8-4e02-82b7-bfd8e1ecdf64",
+    "name": "a plugin for teleport",
+    "uuid": "17ebfffd-e6e1-4ebd-94a2-de76b1de417d",
     "version": [0, 0, 0],
     "min_engine_version": [1, 9, 0]
   },
@@ -11,7 +11,7 @@
     {
       "description": "data",
       "type": "data",
-      "uuid": "753d8d47-e8dd-4e63-9ad1-cc3ca6758ad1",
+      "uuid": "7eb6dc28-1245-48c5-95b3-f327fb589f7b",
       "version": [0, 0, 0]
     }
   ]
