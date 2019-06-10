@@ -28,8 +28,8 @@ system.initialize = function() {
             )
               .then(sel => {
                 if (JSON.parse(sel) === true) {
-                  this.invokeConsoleCommand("tp",`tp ${info.name} ${x} ${y} ${z}`)
-                  this.invokeConsoleCommand("§ateleport",`tell ${info.name} §a已回家`);
+                  this.invokeConsoleCommand("tp",`tp "${info.name}" ${x} ${y} ${z}`)
+                  this.invokeConsoleCommand("§ateleport",`tell "${info.name}" §a已回家`);
                 }
               })
               .catch(server.log);
@@ -64,8 +64,8 @@ system.initialize = function() {
             )
               .then(sel => {
                 if (JSON.parse(sel) === true) {
-                    this.invokeConsoleCommand('sethome',`spawnpoint ${info.name} ${x} ${y} ${z}`);
-                    this.invokeConsoleCommand("§ateleport",`tell ${info.name} §a已成功为你设置家`);
+                    this.invokeConsoleCommand('sethome',`spawnpoint "${info.name}" ${x} ${y} ${z}`);
+                    this.invokeConsoleCommand("§ateleport",`tell "${info.name}" §a已成功为你设置家`);
                 }
               })
               .catch(server.log);
@@ -172,7 +172,7 @@ system.initialize = function() {
               if (JSON.parse(sel) === true) {
                   let sourceName = info.name;
                   let targetName = targetinfo.name;
-                  this.invokeConsoleCommand("tp",`tp ${sourceName} ${targetName}`);
+                  this.invokeConsoleCommand("tp",`tp "${sourceName}" "${targetName}"`);
               }
             })
             .catch(server.log);
@@ -239,7 +239,7 @@ system.initialize = function() {
                 let targetName = targetinfo.name;
                 let sourceName = info.name;
                 //let sourcePos:string = getPositionofEntity(origin.entity);
-                this.invokeConsoleCommand("tp",`tp ${targetName} ${sourceName}`);
+                this.invokeConsoleCommand("tp",`tp "${targetName}" "${sourceName}"`);
               }
             })
             .catch(server.log);
