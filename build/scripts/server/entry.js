@@ -76,21 +76,19 @@
                                 throw "Player required";
                             const info = this.actorInfo(origin.entity);
                             if (utils_1.isPlayerInfo(info)) {
-                                const [x, y, z] = info.spawnPoint;
                                 if (info.dim !== 0)
                                     throw "只能在主世界设置家";
-                                if (x === 0 && y === -1 && z === 0)
-                                    throw "No home found!";
+                                var position = getPositionofEntity(origin.entity);
                                 this.openModalForm(origin.entity, JSON.stringify({
                                     type: "modal",
                                     title: "Teleport Menu",
-                                    content: `你想把家设置在这里吗(${x}, ${y}, ${z})`,
+                                    content: `你想把家设置在这里吗(${position})`,
                                     button1: "Yes",
                                     button2: "No"
                                 }))
                                     .then(sel => {
                                     if (JSON.parse(sel) === true) {
-                                        this.invokeConsoleCommand('sethome', `spawnpoint "${info.name}" ${x} ${y} ${z}`);
+                                        this.invokeConsoleCommand('sethome', `spawnpoint "${info.name}" ${position}`);
                                         this.invokeConsoleCommand("§ateleport", `tell "${info.name}" §a已成功为你设置家`);
                                     }
                                 })
@@ -131,6 +129,7 @@
                                         const component = this.createComponent(origin.entity, "minecraft:position" /* Position */);
                                         Object.assign(component.data, { x, y, z });
                                         this.applyComponentChanges(origin.entity, component);
+                                        this.invokeConsoleCommand("tp", `tell ${info.name} 已回城`);
                                     }
                                 })
                                     .catch(server.log);
@@ -187,9 +186,13 @@
                             }))
                                 .then(sel => {
                                 if (JSON.parse(sel) === true) {
-                                    let sourceName = info.name;
+                                    var sourceName = info.name;
                                     let targetName = targetinfo.name;
                                     this.invokeConsoleCommand("tp", `tp "${sourceName}" "${targetName}"`);
+                                    this.invokeConsoleCommand("tp", `tell ${sourceName} §a对方已接受请求`);
+                                }
+                                else {
+                                    this.invokeConsoleCommand("tp", `tell ${sourceName} §c对方已拒绝请求`);
                                 }
                             })
                                 .catch(server.log);
@@ -244,9 +247,13 @@
                                 .then(sel => {
                                 if (JSON.parse(sel) === true) {
                                     let targetName = targetinfo.name;
-                                    let sourceName = info.name;
+                                    var sourceName = info.name;
                                     //let sourcePos:string = getPositionofEntity(origin.entity);
                                     this.invokeConsoleCommand("tp", `tp "${targetName}" "${sourceName}"`);
+                                    this.invokeConsoleCommand("tp", `tell ${sourceName} §a对方已接受邀请`);
+                                }
+                                else {
+                                    this.invokeConsoleCommand("tp", `tell ${sourceName} §c对方已拒绝邀请`);
                                 }
                             })
                                 .catch(server.log);
